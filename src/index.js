@@ -3,11 +3,16 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import {Route, BrowserRouter, Routes} from 'react-router-dom'
+import {Login} from '../src/screens/Login.tsx'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <BrowserRouter>
+    <Login>
+    </Login>
+    </BrowserRouter>
   </React.StrictMode>
 );
 
