@@ -4,14 +4,17 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {Route, BrowserRouter, Routes} from 'react-router-dom'
-import {Login} from '../src/screens/Login.tsx'
+import Login from '../src/screens/Login.tsx'
+import NewUser from '../src/screens/NewUser.tsx'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-    <Login>
-    </Login>
+      <Routes>
+        <Route path='/' element={<Login/>}/>
+        <Route path='/register' element={<NewUser/>}/>
+      </Routes>
     </BrowserRouter>
   </React.StrictMode>
 );
