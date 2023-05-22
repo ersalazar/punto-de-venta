@@ -5,16 +5,20 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {Route, BrowserRouter, Routes} from 'react-router-dom'
 import Login from '../src/screens/Login.tsx'
-import NewUser from '../src/screens/NewUser.tsx'
+import Products from './screens/Products.tsx';
+import NewUser from './screens/NewUser.tsx';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
+      <Products />
+
       <Routes>
-        <Route path='/' element={<Login/>}/>
+        <Route path='/login' element={<Login/>}/>
         <Route path='/register' element={<NewUser/>}/>
       </Routes>
+      
     </BrowserRouter>
   </React.StrictMode>
 );

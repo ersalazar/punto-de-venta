@@ -6,7 +6,7 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Alert from '@mui/material/Alert';
 import { NavLink } from 'react-router-dom';
-import { createUser } from "../firebse/FirebaseFunctions.tsx";
+import { createUser } from "../firebse/UserFirebase.tsx";
 
 function NewUser() {
 
