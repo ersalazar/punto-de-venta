@@ -1,6 +1,7 @@
 //@ts-nocheck
-import { Container, Grid, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
+import { Container, Grid, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Button } from "@mui/material";
 import React, { useEffect, useState } from "react";
+import { NavLink } from "react-router-dom";
 import { getProducts } from "../firebse/ProductsFirebase.tsx";
 
 
@@ -38,7 +39,7 @@ function Products() {
                             {
                                 products.map((product) => {
                                     const {name, costOfSale, sellingPrice, stock} = product.data();
-                                    const {id} = product;
+                                    const {id} = product.id;
                                 return(
                                     <TableRow
                                     key={id}
@@ -50,6 +51,16 @@ function Products() {
                                     <TableCell align="right">{costOfSale}</TableCell>
                                     <TableCell align="right">{sellingPrice}</TableCell>
                                     <TableCell align="right">{stock}</TableCell>
+                                    <TableCell>
+                                        <NavLink to={'/product/0'} >
+                                            <Button variant="contained">Editar</Button>
+                                        </NavLink>
+                                    </TableCell>
+                                    <TableCell>
+                                        <NavLink to={`/product/${id}`}>
+                                         <Button variant="outlined">Eliminar</Button>
+                                        </NavLink>
+                                    </TableCell>
                                     </TableRow>
                                 );
                                 })

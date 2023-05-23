@@ -1,6 +1,6 @@
 //@ts-nocheck
 import {addDoc, collection, deleteDoc, doc, getDoc, getDocs, updateDoc} from "firebase/firestore"
-import { db } from "./credentials.js"
+import { db } from "./credentials.ts"
 import { Service } from "../interfaces/Service.ts"
 
 const ServiceCollection = collection(db, 'services')

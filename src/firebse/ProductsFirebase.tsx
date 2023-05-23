@@ -37,7 +37,7 @@ export const getProduct = async (id) => {
     const docRef = doc(db, 'products', id)
     try{
         const product = await  getDoc(docRef);
-        return product.data()
+        return product
     } catch (error) {
         console.log(error)
     }
