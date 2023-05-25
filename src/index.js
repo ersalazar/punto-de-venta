@@ -8,23 +8,23 @@ import Products from './screens/Products.tsx';
 import NewUser from './screens/NewUser.tsx';
 import Services from './screens/Services.tsx';
 import NewProduct from './screens/NewProduct.tsx';
-import NewService from './screens/NewProduct.tsx';
+import NewService from './screens/NewService.tsx';
+import Sales from './screens/Sales.tsx';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
     <BrowserRouter>
-      <Products />
-      <Services />
       <Routes>
-        <Route path='/login' element={<Login/>}/>
+        <Route exact path='/' element={<Login/>}/>
         <Route path='/register' element={<NewUser/>}/>
-        <Route path='/product/:id' element={<NewProduct/>}/>
-        <Route path='/service/:id' element={<NewService/>}/>
+        <Route path='/products/' element={<Products/>}/>
+        <Route path='/products/:id' element={<NewProduct/>}/>
+        <Route path='/services/' element={<Services/>}/>
+        <Route path='/services/:id' element={<NewService/>}/>
+        <Route path='/sales/' element={<Sales/>}/>
       </Routes>
       
     </BrowserRouter>
-  </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function

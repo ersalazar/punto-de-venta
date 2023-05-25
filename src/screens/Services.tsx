@@ -13,7 +13,7 @@ import {
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import { getServices } from "../firebse/ServicesFirebase.tsx";
+import { getServices } from "../firebase/ServicesFirebase.tsx";
 
 function Services() {
   const [services, setServices] = useState<QueryDocumentSnapshot<DocumentData>[] | []>([]);
@@ -56,7 +56,7 @@ function Services() {
                       <TableCell align="right">{costOfSale}</TableCell>
                       <TableCell align="right">{sellingPrice}</TableCell>
                       <TableCell>
-                        <NavLink to={"/"}>
+                        <NavLink to={`/services/${id}`}>
                           <Button variant="contained">Editar</Button>
                         </NavLink>
                       </TableCell>

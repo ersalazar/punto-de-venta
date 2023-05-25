@@ -2,7 +2,7 @@
 import { Container, Grid, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Button } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import { getProducts } from "../firebse/ProductsFirebase.tsx";
+import { getProducts } from "../firebase/ProductsFirebase.tsx";
 
 
 function Products() {
@@ -23,6 +23,7 @@ function Products() {
 
     return (
         <Container>
+            <NavLink to='/products/0' className='btn btn-primary mt-5'> Agregar nuevo producto</NavLink>
             <Grid container spacing={2} marginTop={3}>
                 <Grid item>
                     <TableContainer component={Paper}>
@@ -39,38 +40,36 @@ function Products() {
                             {
                                 products.map((product) => {
                                     const {name, costOfSale, sellingPrice, stock} = product.data();
-                                    const {id} = product.id;
-                                return(
-                                    <TableRow
-                                    key={id}
-                                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                                    >
-                                    <TableCell component="th" scope="product">
-                                        {name}
-                                    </TableCell>
-                                    <TableCell align="right">{costOfSale}</TableCell>
-                                    <TableCell align="right">{sellingPrice}</TableCell>
-                                    <TableCell align="right">{stock}</TableCell>
-                                    <TableCell>
-                                        <NavLink to={'/product/0'} >
-                                            <Button variant="contained">Editar</Button>
-                                        </NavLink>
-                                    </TableCell>
-                                    <TableCell>
-                                        <NavLink to={`/product/${id}`}>
-                                         <Button variant="outlined">Eliminar</Button>
-                                        </NavLink>
-                                    </TableCell>
-                                    </TableRow>
-                                );
+                                    const id = product.id;
+                                    return(
+                                        <TableRow
+                                        key={id}
+                                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                        >
+                                        <TableCell component="th" scope="product">
+                                            {name}
+                                        </TableCell>
+                                        <TableCell align="right">{costOfSale}</TableCell>
+                                        <TableCell align="right">{sellingPrice}</TableCell>
+                                        <TableCell align="right">{stock}</TableCell>
+                                        <TableCell>
+                                            <NavLink to={`/products/${id}`} >
+                                                <Button variant="contained">Editar</Button>
+                                            </NavLink>
+                                        </TableCell>
+                                        <TableCell>
+                                            <NavLink to={`/product/${id}`}>
+                                            <Button variant="outlined">Eliminar</Button>
+                                            </NavLink>
+                                        </TableCell>
+                                        </TableRow>
+                                    );
                                 })
                              }
                             </TableBody>
                         </Table>
                     </TableContainer>
-
                 </Grid>
-
             </Grid>
         </Container>
     )

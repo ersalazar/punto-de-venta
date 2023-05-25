@@ -3,16 +3,16 @@ import { Alert, Button, Container, Grid, TextField, Typography } from "@mui/mate
 import { useEffect, useState } from "react";
 import useForm from "../hooks/useForm.ts";
 import {emptyProduct, Product} from '../interfaces/Product.ts';
-import {addProduct, updateProduct} from '../firebse/ProductsFirebase.tsx'
-import { useParams } from "react-router-dom";
-import { getProduct } from '../firebse/ProductsFirebase.tsx'
+import {addProduct, updateProduct} from '../firebase/ProductsFirebase.tsx'
+import { useParams, useNavigate } from "react-router-dom";
+import { getProduct } from '../firebase/ProductsFirebase.tsx'
 
 function NewProduct (){
     
+    const navigate = useNavigate()
+    const [formProduct, handleChange, setFormProduct] = useForm(emptyProduct);
 
-    const [formProduct, handleChange] = useForm(emptyProduct);
-
-    const [ error, setError, setState ] = useState('');
+    const [ error, setError ] = useState('');
     const [ success, setSuccess ] = useState('');
 
     const { id } = useParams()
@@ -20,11 +20,10 @@ function NewProduct (){
     
     const { name, costOfSale, sellingPrice, stock } = formProduct; 
 
-    const loadProduct = async(id) =>{
-        
+    const loadProduct = async (id) =>{
         if (id !== '0'){
             const product = await getProduct(id)
-            setState(product)
+            setFormProduct(product.data())
         }
     }
 
@@ -35,14 +34,28 @@ function NewProduct (){
 
 
     const save = async () => {
-        if (id === '0'){
-            const result = await addProduct(formProduct);
-            result ? setSuccess("Product added") : setError("Product not added");
-        }else{
-            const result = await updateProduct(formProduct);
-            result ? setSuccess("Product updated!") : setError("Product not updated");
-        }
+      const result = await addProduct(id ,formProduct);
+      if(result){
+        setSuccess("Product updated!")
+        setTimeout(() => {
+          navigate('/products')
+        }, [1500])
+      } else {
+        setError("Please check the product information");
       }
+    }
+    
+    const update = async () => {
+      const result = await updateProduct(id ,formProduct);
+      if(result){
+        setSuccess("Product updated!")
+        setTimeout(() => {
+          navigate('/products')
+        }, [1500])
+      } else {
+        setError("Please check the product information");
+      }
+    }
       
     return (
       <Container>
@@ -68,7 +81,7 @@ function NewProduct (){
               <br/><br/>
               <TextField type="text" name="stock" value={stock} onChange={handleChange} fullWidth={true} label="stock" variant="outlined" />
               <br/><br/>
-              {id !=='0' ? <Button variant="outlined" onClick={save} >Update</Button> : <Button variant="outlined" onClick={save} >Save</Button>}
+              {id !=='0' ? <Button variant="outlined" onClick={update} >Update</Button> : <Button variant="outlined" onClick={save} >Save</Button>}
               </Grid>
             </Grid>
         </Grid>
