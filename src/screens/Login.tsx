@@ -12,9 +12,8 @@ import Alert from '@mui/material/Alert';
 
 function Login({setIsLogged}) {
     const [formUser, handleChange] = useForm(emptyUser);    
-    const {email, password} = formUser
-    const [error, setError] = useState('')
-    const navigate = useNavigate(); 
+    const {email, password} = formUser;
+    const [error, setError] = useState('');
 
     const loginClick = async () => {
       const response = await loginUser(formUser) 

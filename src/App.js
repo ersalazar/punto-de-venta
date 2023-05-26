@@ -30,24 +30,26 @@ function App() {
 
   return (
     <BrowserRouter>
-    <ResponsiveAppBar />
-      <Routes>
         {!isLogged ? (
-          <Route path='/' element={<Login setIsLogged={setIsLogged}/>}/>
+          <Routes>
+            <Route path='/' element={<Login setIsLogged={setIsLogged}/>}/>
+          </Routes>
         ) : 
         (
           <>
-          <Route exact path='/' element={<Sales/>}/>
-          <Route path='/register' element={<NewUser/>}/>
-          <Route path='/products/' element={<Products/>}/>
-          <Route path='/products/:id' element={<NewProduct/>}/>
-          <Route path='/services/' element={<Services/>}/>
-          <Route path='/services/:id' element={<NewService/>}/>
-          <Route path='/newSale/' element={<NewSale/>}/>
-          <Route path='/sales/' element={<Sales/>}/>
+          <ResponsiveAppBar />
+          <Routes>  
+            <Route exact path='/' element={<Sales/>}/>
+            <Route path='/register' element={<NewUser/>}/>
+            <Route path='/products/' element={<Products/>}/>
+            <Route path='/products/:id' element={<NewProduct/>}/>
+            <Route path='/services/' element={<Services/>}/>
+            <Route path='/services/:id' element={<NewService/>}/>
+            <Route path='/newSale/' element={<NewSale/>}/>
+            <Route path='/sales/' element={<Sales/>}/>
+          </Routes>
           </>
         )}
-      </Routes>  
     </BrowserRouter>
   );
 }

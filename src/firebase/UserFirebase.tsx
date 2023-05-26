@@ -2,7 +2,6 @@
 import {  createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from './credentials.ts'
 
-
 export const createUser = async  ( user : User) => {
 
     const {email, password} = user
@@ -25,4 +24,9 @@ export const loginUser = async(user : User) => {
         console.log(err)
         return false   
     }
+}
+
+export const logoutUser = async(user: User) => {
+    localStorage.clear()
+    window.location.reload();
 }
