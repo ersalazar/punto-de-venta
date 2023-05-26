@@ -18,7 +18,8 @@ export const createUser = async  ( user : User) => {
 export const loginUser = async(user : User) => {
     const {email, password} = user
     try{
-        const result = await signInWithEmailAndPassword(auth, email, password)
+        const result = (await signInWithEmailAndPassword(auth, email, password)).user
+        localStorage.setItem("Email",result.email)
         return true
     } catch (err) {
         console.log(err)

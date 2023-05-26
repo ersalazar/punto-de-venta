@@ -2,34 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import {Route, BrowserRouter, Routes} from 'react-router-dom'
-import Login from '../src/screens/Login.tsx'
-import Products from './screens/Products.tsx';
-import NewUser from './screens/NewUser.tsx';
-import Services from './screens/Services.tsx';
-import NewProduct from './screens/NewProduct.tsx';
-import NewService from './screens/NewService.tsx';
-import ResponsiveAppBar from './components/ResponsiveAppBar.tsx';
-import NewSale from './screens/NewSale.tsx';
-import Sales from './screens/Sales.tsx';
-
+import App from './App'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <BrowserRouter>
-    <ResponsiveAppBar />
-      <Routes>
-        <Route exact path='/' element={<Login/>}/>
-        <Route path='/register' element={<NewUser/>}/>
-        <Route path='/products/' element={<Products/>}/>
-        <Route path='/products/:id' element={<NewProduct/>}/>
-        <Route path='/services/' element={<Services/>}/>
-        <Route path='/services/:id' element={<NewService/>}/>
-        <Route path='/newSale/' element={<NewSale/>}/>
-        <Route path='/sales/' element={<Sales/>}/>
-      </Routes>
-      
-    </BrowserRouter>
+    <div>
+      <App />
+    </div>
 );
 
 // If you want to start measuring performance in your app, pass a function

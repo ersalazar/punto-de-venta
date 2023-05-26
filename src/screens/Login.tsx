@@ -10,8 +10,7 @@ import { loginUser } from '../firebase/UserFirebase.tsx';
 import Alert from '@mui/material/Alert';
 
 
-function Login() {
-
+function Login({setIsLogged}) {
     const [formUser, handleChange] = useForm(emptyUser);    
     const {email, password} = formUser
     const [error, setError] = useState('')
@@ -20,7 +19,7 @@ function Login() {
     const loginClick = async () => {
       const response = await loginUser(formUser) 
         if (response){
-          navigate('/sales')
+          setIsLogged(true)
         }
         else{
             setError('Incorrect email or password, try again')
