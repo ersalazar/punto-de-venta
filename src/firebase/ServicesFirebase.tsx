@@ -10,6 +10,7 @@ export const addService = async (Service : Service) => {
         if(Service.costOfSale > Service.sellingPrice){
             return false
         }
+        console.log(Service)
         await addDoc(ServiceCollection, Service)
         return true
     }catch (err) {

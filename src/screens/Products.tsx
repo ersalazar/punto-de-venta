@@ -2,7 +2,7 @@
 import { Container, Grid, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Button } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import { getProducts } from "../firebase/ProductsFirebase.tsx";
+import { deleteProduct, getProducts } from "../firebase/ProductsFirebase.tsx";
 
 
 function Products() {
@@ -59,7 +59,7 @@ function Products() {
                                         </TableCell>
                                         <TableCell>
                                             <NavLink to={`/product/${id}`}>
-                                            <Button variant="outlined">Eliminar</Button>
+                                            <Button variant="outlined" >Eliminar</Button>
                                             </NavLink>
                                         </TableCell>
                                         </TableRow>

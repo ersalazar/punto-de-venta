@@ -34,9 +34,9 @@ function NewService(){
 
 
     const save = async () => {
-      const result = await addService(id ,formService);
+      const result = await addService(formService);
       if(result){
-        setSuccess("Service updated!")
+        setSuccess("Service created!")
         setTimeout(() => {
           navigate('/services')
         }, [1500])
@@ -79,7 +79,8 @@ function NewService(){
               <br/><br/>
               <TextField type="text" name="sellingPrice" value={sellingPrice} onChange={handleChange} fullWidth={true} label="SellingPrice" variant="outlined" />
               <br/><br/>
-              {id !=='0' ? <Button variant="outlined" onClick={update} >Update</Button> : <Button variant="outlined" onClick={save} >Save</Button>}
+              {id !=='0' && <Button variant="outlined" onClick={update} >Update</Button>}
+              {id ==='0' &&<Button variant="outlined" onClick={save} >Save</Button>}
               </Grid>
             </Grid>
         </Grid>

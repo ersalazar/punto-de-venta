@@ -12,8 +12,8 @@ import {
   TableRow,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
-import { getServices } from "../firebase/ServicesFirebase.tsx";
+import { NavLink, redirect } from "react-router-dom";
+import { deleteService, getServices } from "../firebase/ServicesFirebase.tsx";
 
 function Services() {
   const [services, setServices] = useState<QueryDocumentSnapshot<DocumentData>[] | []>([]);
@@ -28,8 +28,17 @@ function Services() {
     setServices(services.docs);
   };
 
+  const deleteService =async (id) => {
+    const result = await deleteService(id)
+    if (result){
+      redirect('/services')
+    }
+
+    
+  }
   return (
     <Container>
+       <NavLink to='/services/0' className='btn btn-primary mt-5'> Agregar nuevo servicio</NavLink>
       <Grid container spacing={2} marginTop={3}>
         <Grid item>
           <TableContainer component={Paper}>

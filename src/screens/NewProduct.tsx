@@ -34,9 +34,9 @@ function NewProduct (){
 
 
     const save = async () => {
-      const result = await addProduct(id ,formProduct);
+      const result = await addProduct(formProduct);
       if(result){
-        setSuccess("Product updated!")
+        setSuccess("Product created!")
         setTimeout(() => {
           navigate('/products')
         }, [1500])
@@ -81,7 +81,8 @@ function NewProduct (){
               <br/><br/>
               <TextField type="text" name="stock" value={stock} onChange={handleChange} fullWidth={true} label="stock" variant="outlined" />
               <br/><br/>
-              {id !=='0' ? <Button variant="outlined" onClick={update} >Update</Button> : <Button variant="outlined" onClick={save} >Save</Button>}
+              {id !=='0' && <Button variant="outlined" onClick={update} >Update</Button>}
+              {id ==='0' &&<Button variant="outlined" onClick={save} >Save</Button>}
               </Grid>
             </Grid>
         </Grid>

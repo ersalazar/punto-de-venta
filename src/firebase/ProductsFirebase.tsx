@@ -54,3 +54,18 @@ export const updateProduct = async (id, data : Product) => {
     }
     return 
 };
+
+export const buyProduct = async (id, quantity) => {
+    try{
+        const item = await getProduct(id);
+        const {stock} = item
+        const updated = {
+            ...item,
+            stock : stock - quantity
+        }
+        await updateProduct(id, updated)
+        return
+    }catch(err){
+        console.log(err)
+    }
+};

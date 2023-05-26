@@ -11,6 +11,7 @@ import NewProduct from './screens/NewProduct.tsx';
 import NewService from './screens/NewService.tsx';
 import Sales from './screens/Sales.tsx';
 
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <BrowserRouter>

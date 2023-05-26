@@ -7,6 +7,7 @@ const useForm = (initialState: any) => {
         setState(state => ({ ...state, [e.target.name] : e.target.value }));
     }
 
+    // console.log('State fo menu : ',state)
     return [
         state,
         handleChange, 
