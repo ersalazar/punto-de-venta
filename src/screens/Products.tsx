@@ -19,6 +19,11 @@ function Products() {
         setProducts(products.docs)
     }
 
+    const deleteProducts = async (id: string) => {
+        await deleteProduct(id)
+        loadProducts()
+    }
+
 
 
     return (
@@ -58,9 +63,7 @@ function Products() {
                                             </NavLink>
                                         </TableCell>
                                         <TableCell>
-                                            <NavLink to={`/product/${id}`}>
-                                            <Button variant="outlined" >Eliminar</Button>
-                                            </NavLink>
+                                            <Button onClick={() => deleteProducts(id)} variant="outlined" >Eliminar</Button>
                                         </TableCell>
                                         </TableRow>
                                     );

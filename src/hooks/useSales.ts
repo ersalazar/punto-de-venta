@@ -9,7 +9,6 @@ const useSales = (initialState : SaleItem[]) => {
     const checkStock = async(id : string, quantity : number) : Promise<boolean> =>{
         try {
             const product = (await getProduct(id))?.data()
-            
             if (product) {
                 const {stock} = product
                 if (quantity <= stock){
@@ -21,11 +20,8 @@ const useSales = (initialState : SaleItem[]) => {
         } catch (err) {
             console.log(err)
         }
-        
         return false
     }
-    
-    console.log("inital salesState",salesState)
 
     const updateSaleItemQuantity = async ( 
         saleItems: SaleItem[],
@@ -34,20 +30,16 @@ const useSales = (initialState : SaleItem[]) => {
         type :string
       ):  Promise<boolean> => {
         const itemToUpdate = saleItems.find((item) => item.id === itemId);
-      
         if (!itemToUpdate) {
             return false;
         }
         
         const newQty = itemToUpdate.quantity + newQuantity;
-        console.log('new qty', newQty)
         if (type !== 'product'){
             itemToUpdate.quantity = newQty
             setSalesState(saleItems)
             return true
-            
         }
-        console.log('entro a product', type)
         if (await checkStock(itemId, newQty)){
             itemToUpdate.quantity = newQty
             setSalesState(saleItems)
@@ -57,12 +49,10 @@ const useSales = (initialState : SaleItem[]) => {
       }
 
     const addObjects = async (newItem: SaleItem) => {
-        console.log('addObjects', newItem)
         const newState : SaleItem[] = salesState
         const {id, name, type, quantity, sellingPrice} = newItem;
 
         const repeated = await updateSaleItemQuantity(newState, id, quantity, type)
-        console.log('repeated', repeated)
         
         if (!repeated){
             if (type !== 'products') {
@@ -70,28 +60,26 @@ const useSales = (initialState : SaleItem[]) => {
                     id : id,
                     name : name, 
                     quantity : quantity,
-                    sellingPrice : sellingPrice
+                    sellingPrice : sellingPrice,
+                    type: type
                 })
-                console.log('item entrando a no repetido como servicio', newState)
                 setSalesState(newState)
                 return true
             }
             if (await checkStock(id, quantity)){
-                console.log("no debe de entrar aqui si esta pasado", salesState)
                 newState.push({
                     id : id,
                     name : name, 
                     quantity : quantity,
-                    sellingPrice : sellingPrice
+                    sellingPrice : sellingPrice,
+                    type: type
                 })
-                // console.log(newState)
                 setSalesState(newState)
                 return true
             }
             
         }
-        console.log('item repetido, debe de sumar o quedarse igual', salesState)
-        return false
+        return true
         
     }
     return [

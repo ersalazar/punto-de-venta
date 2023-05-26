@@ -2,7 +2,7 @@
 import { Card, Typography, CardMedia, CardContent, CardActions, Button, FormControl, InputLabel, Select, MenuItem, Container, TableContainer, Table, TableHead, TableRow, TableCell, TableBody, Paper, Alert } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import useForm from "../hooks/useForm.ts";
-import { buyProduct, getProducts } from "../firebase/ProductsFirebase.tsx";
+import { buyProduct, getProducts, removeStock } from "../firebase/ProductsFirebase.tsx";
 import { getServices } from "../firebase/ServicesFirebase.tsx";
 import  useSales  from "../hooks/useSales.ts";
 import { Item, SaleItem } from "../interfaces/Sale.js";
@@ -59,15 +59,13 @@ function Sales() {
         sellingPrice: sellingPrice,
         type : type
       };
-      console.log("quantity",quantity)
       const added = await addObjects(saleItem);
-      console.log('added', added)
       if (!added){
         setError('No contamos con suficiente inventario')
       } else {
         setError('')
       }
-      //console.log('Sale item added:', saleItem);
+      fetchProducts();
       
     }
   };
@@ -88,20 +86,18 @@ function Sales() {
     const quantities: number[] = [];
     const sellingPrices: number[] = [];
     let total = 0;
-    // Iterate over the saleItems array
-      try{
-        saleItems.forEach(saleItem  => {
+    try{
+        saleItems.forEach(async (saleItem) => {
         const { id, quantity, sellingPrice, type } = saleItem;
         const itemKey = `${type}/${id}`;
         items.push(itemKey);
         quantities.push(quantity);
         sellingPrices.push(sellingPrice);
-
         total += quantity * sellingPrice;
-      
+        const product = await removeStock(id, quantity)
       })
 
-      const date = new Date(); // Current date and time
+      const date = new Date(); 
 
       const sale: Sale = {
         items,
@@ -111,12 +107,10 @@ function Sales() {
         date,
       };
 
-      const result = await addSale(salesState)
-
+      const result = await addSale(sale)
       if (result){
         setSuccess('Compra realizada!')
         setSalesState([])
-
       }
     }catch(err){
       console.log(err)
@@ -198,7 +192,7 @@ function Sales() {
         </TableBody>
       </Table>
     </TableContainer>
-    <Button className="btn btn-info mx-2" onClick={buyProducts}>Comprar</Button>
+    <Button className="btn btn-info mx-2" onClick={() => buyProducts(salesState)}>Comprar</Button>
     </Container>
   );
 }

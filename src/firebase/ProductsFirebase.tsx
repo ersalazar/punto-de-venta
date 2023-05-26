@@ -24,7 +24,6 @@ export const deleteProduct = async (id) => {
     const docRef = doc(db, 'products', id)
     try{
         await deleteDoc(docRef)
-        console.log('deleted')
         return true
     }catch(error){
         console.log(error)
@@ -69,3 +68,17 @@ export const buyProduct = async (id, quantity) => {
         console.log(err)
     }
 };
+
+export const removeStock = async (id: string, quantity: number) => {
+    try {
+        let product: Product = (await getProduct(id)).data()
+        product.stock -= quantity;
+        if(product.stock < 0){
+            return false
+        }
+        const result = await updateProduct(id, product)
+        return result
+    } catch(err) {
+        console.log(err)
+    }
+}
