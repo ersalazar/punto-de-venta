@@ -75,9 +75,9 @@ function NewService(){
               <Grid item md={4} sm={6} xs={12}>
               <TextField type="text" name="name" value={name} onChange={handleChange} fullWidth={true} label="Name" variant="outlined" />
               <br/><br/>
-              <TextField type="text" name="costOfSale" value={costOfSale} onChange={handleChange} fullWidth={true} label="costOfSale" variant="outlined" />
+              <TextField type="number" name="costOfSale" value={costOfSale} onChange={handleChange} fullWidth={true} label="costOfSale" variant="outlined" />
               <br/><br/>
-              <TextField type="text" name="sellingPrice" value={sellingPrice} onChange={handleChange} fullWidth={true} label="SellingPrice" variant="outlined" />
+              <TextField type="number" name="sellingPrice" value={sellingPrice} onChange={handleChange} fullWidth={true} label="SellingPrice" variant="outlined" />
               <br/><br/>
               {id !=='0' && <Button variant="outlined" onClick={update} >Update</Button>}
               {id ==='0' &&<Button variant="outlined" onClick={save} >Save</Button>}

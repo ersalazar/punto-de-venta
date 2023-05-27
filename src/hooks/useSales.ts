@@ -19,8 +19,8 @@ const useSales = (initialState : SaleItem[]) => {
             
         } catch (err) {
             console.log(err)
+            return false
         }
-        return false
     }
 
     const updateSaleItemQuantity = async ( 
@@ -35,7 +35,7 @@ const useSales = (initialState : SaleItem[]) => {
         }
         
         const newQty = itemToUpdate.quantity + newQuantity;
-        if (type !== 'product'){
+        if (type !== 'products'){
             itemToUpdate.quantity = newQty
             setSalesState(saleItems)
             return true
